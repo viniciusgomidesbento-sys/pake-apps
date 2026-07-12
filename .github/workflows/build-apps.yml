@@ -1,0 +1,239 @@
+# =============================================================================
+# Build Pake Apps — GitHub Actions Workflow
+# =============================================================================
+# Gera apps desktop via Pake CLI para Windows, macOS e Linux a partir de uma
+# config centralizada em config/apps.json.
+#
+# Disparo:
+#   - Manual (workflow_dispatch) — permite escolher app específico
+#   - Push na main com mudanças em config/apps.json ou no próprio workflow
+#
+# Cache:
+#   - Rust (~/.cargo, ~/.rustup) — persiste entre builds, acelera ~10min → ~5min
+#   - npm global — pacotes do Pake CLI
+#
+# Saída:
+#   - Windows: .msi .exe
+#   - macOS:   .dmg .app .dmg
+#   - Linux:   .deb .AppImage .rpm .pkg.tar.zst
+#   - Todos:   *-binary (standalone, quando keep-binary=true)
+# =============================================================================
+
+name: Build Pake Apps
+
+on:
+  workflow_dispatch:
+    inputs:
+      app-name:
+        description: 'App específico para build (vazio = todos)'
+        required: false
+        type: string
+      skip-cache:
+        description: 'Ignorar cache (útil se cache corrompido)'
+        required: false
+        default: false
+        type: boolean
+
+  push:
+    branches: [main]
+    paths:
+      - 'config/apps.json'
+      - '.github/workflows/build-apps.yml'
+
+  pull_request:
+    branches: [main]
+    paths:
+      - 'config/apps.json'
+      - '.github/workflows/build-apps.yml'
+
+env:
+  PAKE_CACHE_KEY: pake-v1
+  CARGO_TERM_COLOR: always
+
+# ── Jobs ────────────────────────────────────────────────────────────────────
+jobs:
+
+  # ── Job 1: Config ─────────────────────────────────────────────────────────
+  # Lê config/apps.json, filtra se app específico foi solicitado, e gera a
+  # matrix que o job build vai consumir.
+  config:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.generate-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: generate-matrix
+        name: Gerar matrix de apps
+        run: |
+          APPS=$(cat config/apps.json | jq -c '.apps')
+          if [ -n "${{ inputs.app-name }}" ]; then
+            APPS=$(echo "$APPS" | jq -c \
+              '[.[] | select(.name == "${{ inputs.app-name }}")]')
+            COUNT=$(echo "$APPS" | jq 'length')
+            if [ "$COUNT" -eq 0 ]; then
+              echo "ERRO: App '${{ inputs.app-name }}' não encontrado em config/apps.json"
+              exit 1
+            fi
+          fi
+          echo "matrix=$APPS" >> $GITHUB_OUTPUT
+
+  # ── Job 2: Build ──────────────────────────────────────────────────────────
+  # Matrix sobre 3 SOs × N apps — cada combinação gera um artefato separado.
+  build:
+    needs: config
+    strategy:
+      fail-fast: false          # se um SO falhar, os outros continuam
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+        app: ${{ fromJson(needs.config.outputs.matrix) }}
+
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+
+    steps:
+      # ── Setup ────────────────────────────────────────────────────────────
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # ── Cache ─────────────────────────────────────────────────────────────
+      - name: Cache Rust toolchain
+        if: ${{ !inputs.skip-cache }}
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo
+            ~/.rustup
+          key: ${{ env.PAKE_CACHE_KEY }}-rust-${{ matrix.os }}-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ env.PAKE_CACHE_KEY }}-rust-${{ matrix.os }}-
+            ${{ env.PAKE_CACHE_KEY }}-rust-
+
+      - name: Cache pake-cli global
+        if: ${{ !inputs.skip-cache }}
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm-global
+            /usr/local/lib/node_modules
+          key: ${{ env.PAKE_CACHE_KEY }}-npm-${{ matrix.os }}
+
+      # ── Instalação ────────────────────────────────────────────────────────
+      - name: Install pake-cli
+        run: npm install -g pake-cli
+
+      # ── Build ─────────────────────────────────────────────────────────────
+      - name: Build ${{ matrix.app.name }} (${{ matrix.os }})
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Monta argumentos dinamicamente com base nas props do JSON
+          ARGS=""
+
+          [ -n "$WIDTH" ]       && ARGS="$ARGS --width $WIDTH"
+          [ -n "$HEIGHT" ]      && ARGS="$ARGS --height $HEIGHT"
+          [ -n "$ICON" ]        && ARGS="$ARGS --icon $ICON"
+          [ -n "$SAFE_DOMAIN" ] && ARGS="$ARGS --safe-domain $SAFE_DOMAIN"
+          [ -n "$USER_AGENT" ]  && ARGS="$ARGS --user-agent \"$USER_AGENT\""
+          [ -n "$TITLE" ]       && ARGS="$ARGS --title \"$TITLE\""
+
+          [ "$DARK_MODE" = "true" ]       && ARGS="$ARGS --dark-mode"
+          [ "$SYSTEM_TRAY" = "true" ]     && ARGS="$ARGS --show-system-tray"
+          [ "$MULTI_WINDOW" = "true" ]    && ARGS="$ARGS --multi-window"
+          [ "$INCOGNITO" = "true" ]       && ARGS="$ARGS --incognito"
+          [ "$WASM" = "true" ]            && ARGS="$ARGS --wasm"
+          [ "$DRAG_DROP" = "true" ]       && ARGS="$ARGS --enable-drag-drop"
+          [ "$FULLSCREEN" = "true" ]      && ARGS="$ARGS --fullscreen"
+          [ "$MAXIMIZE" = "true" ]        && ARGS="$ARGS --maximize"
+          [ "$ALWAYS_ON_TOP" = "true" ]   && ARGS="$ARGS --always-on-top"
+          [ "$DISABLED_WEB_SHORTCUTS" = "true" ] && ARGS="$ARGS --disabled-web-shortcuts"
+          [ "$ENABLE_FIND" = "true" ]     && ARGS="$ARGS --enable-find"
+          [ "$FORCE_INTERNAL_NAV" = "true" ] && ARGS="$ARGS --force-internal-navigation"
+          [ "$KEEP_BINARY" = "true" ]     && ARGS="$ARGS --keep-binary"
+          [ "$MULTI_INSTANCE" = "true" ]  && ARGS="$ARGS --multi-instance"
+          [ "$NEW_WINDOW" = "true" ]      && ARGS="$ARGS --new-window"
+          [ "$IGNORE_CERT" = "true" ]     && ARGS="$ARGS --ignore-certificate-errors"
+
+          # macOS-only
+          [ "$CAMERA" = "true" ]          && ARGS="$ARGS --camera"
+          [ "$MICROPHONE" = "true" ]      && ARGS="$ARGS --microphone"
+          [ "$HIDE_TITLE_BAR" = "true" ]  && ARGS="$ARGS --hide-title-bar"
+
+          # hide-on-close: aceita true/false explícito
+          if [ "$HIDE_ON_CLOSE" = "true" ]; then
+            ARGS="$ARGS --hide-on-close"
+          elif [ "$HIDE_ON_CLOSE" = "false" ]; then
+            ARGS="$ARGS --hide-on-close false"
+          fi
+
+          # activation-shortcut
+          [ -n "$ACTIVATION_SHORTCUT" ] && ARGS="$ARGS --activation-shortcut \"$ACTIVATION_SHORTCUT\""
+
+          # inject (CSS/JS locais)
+          if [ -d "$GITHUB_WORKSPACE/config/inject" ]; then
+            INJECT_FILES=$(ls "$GITHUB_WORKSPACE/config/inject"/*.css "$GITHUB_WORKSPACE/config/inject"/*.js 2>/dev/null | paste -sd ',' || true)
+            [ -n "$INJECT_FILES" ] && ARGS="$ARGS --inject $INJECT_FILES"
+          fi
+
+          echo "::group::Pake Build Command"
+          echo "pake $URL --name \"$NAME\" $ARGS"
+          echo "::endgroup::"
+
+          pake "$URL" --name "$NAME" $ARGS
+
+        env:
+          URL:                               ${{ matrix.app.url }}
+          NAME:                              ${{ matrix.app.name }}
+          WIDTH:                             ${{ matrix.app.width }}
+          HEIGHT:                            ${{ matrix.app.height }}
+          ICON:                              ${{ matrix.app.icon }}
+          TITLE:                             ${{ matrix.app.title }}
+          DARK_MODE:                         ${{ matrix.app.dark-mode }}
+          SYSTEM_TRAY:                       ${{ matrix.app.show-system-tray }}
+          HIDE_ON_CLOSE:                     ${{ matrix.app.hide-on-close }}
+          MULTI_WINDOW:                      ${{ matrix.app.multi-window }}
+          MULTI_INSTANCE:                    ${{ matrix.app.multi-instance }}
+          INCOGNITO:                         ${{ matrix.app.incognito }}
+          WASM:                              ${{ matrix.app.wasm }}
+          DRAG_DROP:                         ${{ matrix.app.enable-drag-drop }}
+          FULLSCREEN:                        ${{ matrix.app.fullscreen }}
+          MAXIMIZE:                          ${{ matrix.app.maximize }}
+          ALWAYS_ON_TOP:                     ${{ matrix.app.always-on-top }}
+          SAFE_DOMAIN:                       ${{ matrix.app.safe-domain }}
+          USER_AGENT:                        ${{ matrix.app.user-agent }}
+          DISABLED_WEB_SHORTCUTS:            ${{ matrix.app.disabled-web-shortcuts }}
+          ENABLE_FIND:                       ${{ matrix.app.enable-find }}
+          FORCE_INTERNAL_NAV:                ${{ matrix.app.force-internal-navigation }}
+          KEEP_BINARY:                       ${{ matrix.app.keep-binary }}
+          NEW_WINDOW:                        ${{ matrix.app.new-window }}
+          IGNORE_CERT:                       ${{ matrix.app.ignore-certificate-errors }}
+          CAMERA:                            ${{ matrix.app.camera }}
+          MICROPHONE:                        ${{ matrix.app.microphone }}
+          HIDE_TITLE_BAR:                    ${{ matrix.app.hide-title-bar }}
+          ACTIVATION_SHORTCUT:               ${{ matrix.app.activation-shortcut }}
+
+      # ── Upload ────────────────────────────────────────────────────────────
+      - name: Upload ${{ matrix.app.name }} (${{ matrix.os }})
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.app.name }}-${{ matrix.os }}
+          path: |
+            *.msi
+            *.exe
+            *.dmg
+            *.app
+            *.deb
+            *.AppImage
+            *.rpm
+            *.pkg.tar.zst
+            *-binary
+          if-no-files-found: warn
+          retention-days: 30

@@ -1,0 +1,26 @@
+# ── Artefatos de build local ──
+apps/
+*.msi
+*.exe
+*.dmg
+*.app
+*.AppImage
+*.deb
+*.rpm
+*.pkg.tar.zst
+*-binary
+
+# ── Dependências ──
+node_modules/
+.cargo/
+
+# ── Sistema ──
+.DS_Store
+Thumbs.db
+*.log
+
+# ── IDE ──
+.vscode/
+.idea/
+*.swp
+*.swo
