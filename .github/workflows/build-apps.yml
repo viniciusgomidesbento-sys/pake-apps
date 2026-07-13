@@ -35,13 +35,13 @@ on:
         type: boolean
 
   push:
-    branches: [main]
+    branches: [master, main]
     paths:
       - 'config/apps.json'
       - '.github/workflows/build-apps.yml'
 
   pull_request:
-    branches: [main]
+    branches: [master, main]
     paths:
       - 'config/apps.json'
       - '.github/workflows/build-apps.yml'
