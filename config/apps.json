@@ -341,6 +341,37 @@
       "hide-title-bar": false,
       "activation-shortcut": "CmdOrControl+Shift+A",
       "title": "Claude"
+    },
+    {
+      "name": "GitHub",
+      "url": "https://github.com",
+      "description": "GitHub — plataforma de desenvolvimento",
+      "width": 1400,
+      "height": 900,
+      "dark-mode": true,
+      "show-system-tray": true,
+      "hide-on-close": true,
+      "enable-drag-drop": true,
+      "enable-find": true,
+      "force-internal-navigation": true,
+      "new-window": true,
+      "multi-window": true,
+      "keep-binary": false,
+      "safe-domain": "github.com",
+      "user-agent": null,
+      "wasm": false,
+      "incognito": false,
+      "multi-instance": false,
+      "camera": false,
+      "microphone": false,
+      "fullscreen": false,
+      "maximize": false,
+      "always-on-top": false,
+      "disabled-web-shortcuts": false,
+      "ignore-certificate-errors": false,
+      "hide-title-bar": false,
+      "activation-shortcut": "CmdOrControl+Shift+G",
+      "title": "GitHub"
     }
   ]
 }
