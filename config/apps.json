@@ -372,6 +372,37 @@
       "hide-title-bar": false,
       "activation-shortcut": "CmdOrControl+Shift+G",
       "title": "GitHub"
+    },
+    {
+      "name": "Hermes Agent",
+      "url": "https://hermes-agent-kdzx.srv1724289.hstgr.cloud/sessions",
+      "description": "Hermes Agent — console de sessões IA (VPS Hostinger)",
+      "width": 1400,
+      "height": 900,
+      "dark-mode": true,
+      "show-system-tray": true,
+      "hide-on-close": true,
+      "enable-drag-drop": false,
+      "enable-find": true,
+      "force-internal-navigation": true,
+      "new-window": false,
+      "multi-window": false,
+      "keep-binary": false,
+      "safe-domain": "srv1724289.hstgr.cloud",
+      "user-agent": null,
+      "wasm": false,
+      "incognito": false,
+      "multi-instance": false,
+      "camera": false,
+      "microphone": false,
+      "fullscreen": false,
+      "maximize": false,
+      "always-on-top": false,
+      "disabled-web-shortcuts": false,
+      "ignore-certificate-errors": false,
+      "hide-title-bar": false,
+      "activation-shortcut": "CmdOrControl+Shift+H",
+      "title": "Hermes"
     }
   ]
 }
