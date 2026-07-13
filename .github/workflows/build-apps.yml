@@ -135,59 +135,61 @@ jobs:
         run: |
           set -euo pipefail
 
-          # Monta argumentos dinamicamente com base nas props do JSON
-          ARGS=""
+          # Usa array do bash para lidar com argumentos que contêm espaços
+          ARGS=()
 
-          [ -n "$WIDTH" ]       && ARGS="$ARGS --width $WIDTH"
-          [ -n "$HEIGHT" ]      && ARGS="$ARGS --height $HEIGHT"
-          [ -n "$ICON" ]        && ARGS="$ARGS --icon $ICON"
-          [ -n "$SAFE_DOMAIN" ] && ARGS="$ARGS --safe-domain $SAFE_DOMAIN"
-          [ -n "$USER_AGENT" ]  && ARGS="$ARGS --user-agent \"$USER_AGENT\""
-          [ -n "$TITLE" ]       && ARGS="$ARGS --title \"$TITLE\""
+          [ -n "$WIDTH" ]       && ARGS+=(--width "$WIDTH")
+          [ -n "$HEIGHT" ]      && ARGS+=(--height "$HEIGHT")
+          [ -n "$ICON" ]        && ARGS+=(--icon "$ICON")
+          [ -n "$SAFE_DOMAIN" ] && ARGS+=(--safe-domain "$SAFE_DOMAIN")
+          [ -n "$USER_AGENT" ]  && ARGS+=(--user-agent "$USER_AGENT")
+          [ -n "$TITLE" ]       && ARGS+=(--title "$TITLE")
 
-          [ "$DARK_MODE" = "true" ]       && ARGS="$ARGS --dark-mode"
-          [ "$SYSTEM_TRAY" = "true" ]     && ARGS="$ARGS --show-system-tray"
-          [ "$MULTI_WINDOW" = "true" ]    && ARGS="$ARGS --multi-window"
-          [ "$INCOGNITO" = "true" ]       && ARGS="$ARGS --incognito"
-          [ "$WASM" = "true" ]            && ARGS="$ARGS --wasm"
-          [ "$DRAG_DROP" = "true" ]       && ARGS="$ARGS --enable-drag-drop"
-          [ "$FULLSCREEN" = "true" ]      && ARGS="$ARGS --fullscreen"
-          [ "$MAXIMIZE" = "true" ]        && ARGS="$ARGS --maximize"
-          [ "$ALWAYS_ON_TOP" = "true" ]   && ARGS="$ARGS --always-on-top"
-          [ "$DISABLED_WEB_SHORTCUTS" = "true" ] && ARGS="$ARGS --disabled-web-shortcuts"
-          [ "$ENABLE_FIND" = "true" ]     && ARGS="$ARGS --enable-find"
-          [ "$FORCE_INTERNAL_NAV" = "true" ] && ARGS="$ARGS --force-internal-navigation"
-          [ "$KEEP_BINARY" = "true" ]     && ARGS="$ARGS --keep-binary"
-          [ "$MULTI_INSTANCE" = "true" ]  && ARGS="$ARGS --multi-instance"
-          [ "$NEW_WINDOW" = "true" ]      && ARGS="$ARGS --new-window"
-          [ "$IGNORE_CERT" = "true" ]     && ARGS="$ARGS --ignore-certificate-errors"
+          [ "$DARK_MODE" = "true" ]       && ARGS+=(--dark-mode)
+          [ "$SYSTEM_TRAY" = "true" ]     && ARGS+=(--show-system-tray)
+          [ "$MULTI_WINDOW" = "true" ]    && ARGS+=(--multi-window)
+          [ "$INCOGNITO" = "true" ]       && ARGS+=(--incognito)
+          [ "$WASM" = "true" ]            && ARGS+=(--wasm)
+          [ "$DRAG_DROP" = "true" ]       && ARGS+=(--enable-drag-drop)
+          [ "$FULLSCREEN" = "true" ]      && ARGS+=(--fullscreen)
+          [ "$MAXIMIZE" = "true" ]        && ARGS+=(--maximize)
+          [ "$ALWAYS_ON_TOP" = "true" ]   && ARGS+=(--always-on-top)
+          [ "$DISABLED_WEB_SHORTCUTS" = "true" ] && ARGS+=(--disabled-web-shortcuts)
+          [ "$ENABLE_FIND" = "true" ]     && ARGS+=(--enable-find)
+          [ "$FORCE_INTERNAL_NAV" = "true" ] && ARGS+=(--force-internal-navigation)
+          [ "$KEEP_BINARY" = "true" ]     && ARGS+=(--keep-binary)
+          [ "$MULTI_INSTANCE" = "true" ]  && ARGS+=(--multi-instance)
+          [ "$NEW_WINDOW" = "true" ]      && ARGS+=(--new-window)
+          [ "$IGNORE_CERT" = "true" ]     && ARGS+=(--ignore-certificate-errors)
 
           # macOS-only
-          [ "$CAMERA" = "true" ]          && ARGS="$ARGS --camera"
-          [ "$MICROPHONE" = "true" ]      && ARGS="$ARGS --microphone"
-          [ "$HIDE_TITLE_BAR" = "true" ]  && ARGS="$ARGS --hide-title-bar"
+          [ "$CAMERA" = "true" ]          && ARGS+=(--camera)
+          [ "$MICROPHONE" = "true" ]      && ARGS+=(--microphone)
+          [ "$HIDE_TITLE_BAR" = "true" ]  && ARGS+=(--hide-title-bar)
 
           # hide-on-close: aceita true/false explícito
           if [ "$HIDE_ON_CLOSE" = "true" ]; then
-            ARGS="$ARGS --hide-on-close"
+            ARGS+=(--hide-on-close)
           elif [ "$HIDE_ON_CLOSE" = "false" ]; then
-            ARGS="$ARGS --hide-on-close false"
+            ARGS+=(--hide-on-close false)
           fi
 
           # activation-shortcut
-          [ -n "$ACTIVATION_SHORTCUT" ] && ARGS="$ARGS --activation-shortcut \"$ACTIVATION_SHORTCUT\""
+          [ -n "$ACTIVATION_SHORTCUT" ] && ARGS+=(--activation-shortcut "$ACTIVATION_SHORTCUT")
 
           # inject (CSS/JS locais)
           if [ -d "$GITHUB_WORKSPACE/config/inject" ]; then
-            INJECT_FILES=$(ls "$GITHUB_WORKSPACE/config/inject"/*.css "$GITHUB_WORKSPACE/config/inject"/*.js 2>/dev/null | paste -sd ',' || true)
-            [ -n "$INJECT_FILES" ] && ARGS="$ARGS --inject $INJECT_FILES"
+            for f in "$GITHUB_WORKSPACE/config/inject"/*.css "$GITHUB_WORKSPACE/config/inject"/*.js; do
+              [ -f "$f" ] && INJECT_LIST="${INJECT_LIST:+$INJECT_LIST,}$f"
+            done
+            [ -n "${INJECT_LIST:-}" ] && ARGS+=(--inject "$INJECT_LIST")
           fi
 
           echo "::group::Pake Build Command"
-          echo "pake $URL --name \"$NAME\" $ARGS"
+          echo "pake $URL --name \"$NAME\" ${ARGS[*]}"
           echo "::endgroup::"
 
-          pake "$URL" --name "$NAME" $ARGS
+          pake "$URL" --name "$NAME" "${ARGS[@]}"
 
         env:
           URL:                               ${{ matrix.app.url }}
