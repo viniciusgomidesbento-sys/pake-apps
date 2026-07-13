@@ -310,6 +310,37 @@
       "hide-title-bar": false,
       "activation-shortcut": "CmdOrControl+Shift+O",
       "title": "Docs"
+    },
+    {
+      "name": "Claude AI",
+      "url": "https://claude.ai/login",
+      "description": "Claude AI — assistente IA (Anthropic)",
+      "width": 1400,
+      "height": 900,
+      "dark-mode": true,
+      "show-system-tray": true,
+      "hide-on-close": true,
+      "enable-drag-drop": true,
+      "enable-find": true,
+      "force-internal-navigation": false,
+      "new-window": true,
+      "multi-window": true,
+      "keep-binary": false,
+      "safe-domain": "claude.ai,anthropic.com",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+      "wasm": false,
+      "incognito": false,
+      "multi-instance": false,
+      "camera": false,
+      "microphone": false,
+      "fullscreen": false,
+      "maximize": false,
+      "always-on-top": false,
+      "disabled-web-shortcuts": false,
+      "ignore-certificate-errors": false,
+      "hide-title-bar": false,
+      "activation-shortcut": "CmdOrControl+Shift+A",
+      "title": "Claude"
     }
   ]
 }
