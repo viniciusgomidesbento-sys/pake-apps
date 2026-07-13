@@ -129,6 +129,7 @@ jobs:
       - name: Install Rust toolchain (Linux/macOS)
         if: runner.os != 'Windows'
         run: |
+          mkdir -p "$HOME/.cargo/bin"
           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
           echo "$HOME/.cargo/bin" >> $GITHUB_PATH
           echo "CARGO_HOME=$HOME/.cargo" >> $GITHUB_ENV
