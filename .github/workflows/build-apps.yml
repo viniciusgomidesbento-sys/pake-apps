@@ -126,8 +126,24 @@ jobs:
           key: ${{ env.PAKE_CACHE_KEY }}-npm-${{ matrix.os }}
 
       # ── Instalação ────────────────────────────────────────────────────────
+      - name: Install Rust toolchain (Linux/macOS)
+        if: runner.os != 'Windows'
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+          echo "CARGO_HOME=$HOME/.cargo" >> $GITHUB_ENV
+          echo "RUSTUP_HOME=$HOME/.rustup" >> $GITHUB_ENV
+        shell: bash
+
       - name: Install pake-cli
         run: npm install -g pake-cli
+
+      - name: Verify pake + Rust
+        run: |
+          pake --version
+          rustc --version
+          cargo --version
+        shell: bash
 
       # ── Build ─────────────────────────────────────────────────────────────
       - name: Build ${{ matrix.app.name }} (${{ matrix.os }})
