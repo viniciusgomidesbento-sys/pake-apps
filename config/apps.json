@@ -29,8 +29,15 @@
       "disabled-web-shortcuts": false,
       "ignore-certificate-errors": false,
       "hide-title-bar": false,
+      "zoom": 100,
+      "min-width": 800,
+      "min-height": 600,
+      "start-to-tray": false,
+      "app-version": "1.0.0",
+      "installer-language": "pt-BR",
       "activation-shortcut": null,
-      "title": null
+      "title": null,
+      "icon": null
     },
     {
       "name": "ChatGPT",
@@ -60,8 +67,15 @@
       "force-internal-navigation": false,
       "ignore-certificate-errors": false,
       "hide-title-bar": false,
+      "zoom": 100,
+      "min-width": 800,
+      "min-height": 600,
+      "start-to-tray": false,
+      "app-version": "1.0.0",
+      "installer-language": "pt-BR",
       "activation-shortcut": null,
-      "title": null
+      "title": null,
+      "icon": null
     },
     {
       "name": "n8n",
@@ -91,8 +105,15 @@
       "disabled-web-shortcuts": false,
       "ignore-certificate-errors": false,
       "hide-title-bar": false,
+      "zoom": 100,
+      "min-width": 900,
+      "min-height": 600,
+      "start-to-tray": true,
+      "app-version": "1.0.0",
+      "installer-language": "pt-BR",
       "activation-shortcut": "CmdOrControl+Shift+N",
-      "title": "n8n"
+      "title": "n8n",
+      "icon": null
     },
     {
       "name": "Bear Notes",
@@ -122,8 +143,15 @@
       "disabled-web-shortcuts": false,
       "ignore-certificate-errors": false,
       "hide-title-bar": false,
+      "zoom": 100,
+      "min-width": 800,
+      "min-height": 600,
+      "start-to-tray": false,
+      "app-version": "1.0.0",
+      "installer-language": "pt-BR",
       "activation-shortcut": "CmdOrControl+Shift+B",
-      "title": "Bear Notes"
+      "title": "Bear Notes",
+      "icon": null
     },
     {
       "name": "Tec Concursos",
@@ -153,8 +181,15 @@
       "disabled-web-shortcuts": false,
       "ignore-certificate-errors": false,
       "hide-title-bar": false,
+      "zoom": 100,
+      "min-width": 800,
+      "min-height": 600,
+      "start-to-tray": false,
+      "app-version": "1.0.0",
+      "installer-language": "pt-BR",
       "activation-shortcut": null,
-      "title": null
+      "title": null,
+      "icon": null
     },
     {
       "name": "Guruja",
@@ -184,8 +219,15 @@
       "disabled-web-shortcuts": false,
       "ignore-certificate-errors": false,
       "hide-title-bar": false,
+      "zoom": 100,
+      "min-width": 800,
+      "min-height": 600,
+      "start-to-tray": false,
+      "app-version": "1.0.0",
+      "installer-language": "pt-BR",
       "activation-shortcut": null,
-      "title": null
+      "title": null,
+      "icon": null
     },
     {
       "name": "Google Drive",
@@ -215,8 +257,15 @@
       "disabled-web-shortcuts": false,
       "ignore-certificate-errors": false,
       "hide-title-bar": false,
+      "zoom": 100,
+      "min-width": 900,
+      "min-height": 600,
+      "start-to-tray": false,
+      "app-version": "1.0.0",
+      "installer-language": "pt-BR",
       "activation-shortcut": "CmdOrControl+Shift+D",
-      "title": "Google Drive"
+      "title": "Google Drive",
+      "icon": null
     },
     {
       "name": "Google App Script",
@@ -246,8 +295,15 @@
       "disabled-web-shortcuts": false,
       "ignore-certificate-errors": false,
       "hide-title-bar": false,
+      "zoom": 100,
+      "min-width": 900,
+      "min-height": 600,
+      "start-to-tray": false,
+      "app-version": "1.0.0",
+      "installer-language": "pt-BR",
       "activation-shortcut": "CmdOrControl+Shift+S",
-      "title": "Apps Script"
+      "title": "Apps Script",
+      "icon": null
     },
     {
       "name": "Google Sheets",
@@ -277,8 +333,15 @@
       "disabled-web-shortcuts": false,
       "ignore-certificate-errors": false,
       "hide-title-bar": false,
+      "zoom": 90,
+      "min-width": 900,
+      "min-height": 600,
+      "start-to-tray": false,
+      "app-version": "1.0.0",
+      "installer-language": "pt-BR",
       "activation-shortcut": "CmdOrControl+Shift+E",
-      "title": "Sheets"
+      "title": "Sheets",
+      "icon": null
     },
     {
       "name": "Google Docs",
@@ -308,8 +371,15 @@
       "disabled-web-shortcuts": false,
       "ignore-certificate-errors": false,
       "hide-title-bar": false,
+      "zoom": 100,
+      "min-width": 900,
+      "min-height": 600,
+      "start-to-tray": false,
+      "app-version": "1.0.0",
+      "installer-language": "pt-BR",
       "activation-shortcut": "CmdOrControl+Shift+O",
-      "title": "Docs"
+      "title": "Docs",
+      "icon": null
     },
     {
       "name": "Claude AI",
@@ -339,8 +409,15 @@
       "disabled-web-shortcuts": false,
       "ignore-certificate-errors": false,
       "hide-title-bar": false,
+      "zoom": 100,
+      "min-width": 800,
+      "min-height": 600,
+      "start-to-tray": false,
+      "app-version": "1.0.0",
+      "installer-language": "pt-BR",
       "activation-shortcut": "CmdOrControl+Shift+A",
-      "title": "Claude"
+      "title": "Claude",
+      "icon": null
     },
     {
       "name": "GitHub",
@@ -370,8 +447,15 @@
       "disabled-web-shortcuts": false,
       "ignore-certificate-errors": false,
       "hide-title-bar": false,
+      "zoom": 100,
+      "min-width": 900,
+      "min-height": 600,
+      "start-to-tray": false,
+      "app-version": "1.0.0",
+      "installer-language": "pt-BR",
       "activation-shortcut": "CmdOrControl+Shift+G",
-      "title": "GitHub"
+      "title": "GitHub",
+      "icon": null
     },
     {
       "name": "Hermes Agent",
@@ -402,7 +486,14 @@
       "ignore-certificate-errors": false,
       "hide-title-bar": false,
       "activation-shortcut": "CmdOrControl+Shift+H",
-      "title": "Hermes"
+      "title": "Hermes",
+      "zoom": 100,
+      "min-width": 800,
+      "min-height": 600,
+      "start-to-tray": true,
+      "app-version": "1.0.0",
+      "installer-language": "pt-BR",
+      "icon": null
     }
   ]
 }

@@ -201,6 +201,13 @@ jobs:
           [ -n "$USER_AGENT" ]  && ARGS+=(--user-agent "$USER_AGENT")
           [ -n "$TITLE" ]       && ARGS+=(--title "$TITLE")
 
+          # Novas flags (v2 melhorias)
+          [ -n "$ZOOM" ]              && ARGS+=(--zoom "$ZOOM")
+          [ -n "$MIN_WIDTH" ]         && ARGS+=(--min-width "$MIN_WIDTH")
+          [ -n "$MIN_HEIGHT" ]        && ARGS+=(--min-height "$MIN_HEIGHT")
+          [ -n "$APP_VERSION" ]       && ARGS+=(--app-version "$APP_VERSION")
+          [ -n "$INSTALLER_LANG" ]    && ARGS+=(--installer-language "$INSTALLER_LANG")
+
           [ "$DARK_MODE" = "true" ]       && ARGS+=(--dark-mode)
           [ "$SYSTEM_TRAY" = "true" ]     && ARGS+=(--show-system-tray)
           [ "$MULTI_WINDOW" = "true" ]    && ARGS+=(--multi-window)
@@ -217,6 +224,7 @@ jobs:
           [ "$MULTI_INSTANCE" = "true" ]  && ARGS+=(--multi-instance)
           [ "$NEW_WINDOW" = "true" ]      && ARGS+=(--new-window)
           [ "$IGNORE_CERT" = "true" ]     && ARGS+=(--ignore-certificate-errors)
+          [ "$START_TO_TRAY" = "true" ]   && ARGS+=(--start-to-tray)
 
           # macOS-only
           [ "$CAMERA" = "true" ]          && ARGS+=(--camera)
@@ -277,6 +285,12 @@ jobs:
           MICROPHONE:                        ${{ matrix.app.microphone }}
           HIDE_TITLE_BAR:                    ${{ matrix.app.hide-title-bar }}
           ACTIVATION_SHORTCUT:               ${{ matrix.app.activation-shortcut }}
+          ZOOM:                              ${{ matrix.app.zoom }}
+          MIN_WIDTH:                         ${{ matrix.app.min-width }}
+          MIN_HEIGHT:                        ${{ matrix.app.min-height }}
+          APP_VERSION:                       ${{ matrix.app.app-version }}
+          INSTALLER_LANG:                    ${{ matrix.app.installer-language }}
+          START_TO_TRAY:                     ${{ matrix.app.start-to-tray }}
 
       # ── Upload ────────────────────────────────────────────────────────────
       - name: Upload ${{ matrix.app.name }} (${{ matrix.os }})
