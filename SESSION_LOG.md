@@ -40,7 +40,7 @@ Claude AI, GitHub, Hermes Agent
 - Pake CLI 3.14.0 instalado
 - Cache Rust acelera builds de ~15min para ~5min
 
-# Sessão 2026-07-13 — Melhorias v2 (flags + workflow + ícones)
+# Sessão 2026-07-13 — Expansão para 21 apps (+8 novos)
 
 ## O que foi feito
 1. **Novas flags no `apps.json`** para todos os 13 apps:

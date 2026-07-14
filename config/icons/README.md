@@ -13,11 +13,13 @@ Coloque aqui os ícones dos apps no formato correto por plataforma:
 1. Coloque o ícone com o **mesmo nome do app** na pasta (ex: `chatgpt.ico`, `github.icns`, `n8n.png`)
 2. O workflow injeta automaticamente via `--icon`
 
-## Apps disponíveis
+## Apps disponíveis (21)
 
 - NotebookLM, ChatGPT, n8n, Bear Notes, Tec Concursos, Guruja,
   Google Drive, Google App Script, Google Sheets, Google Docs,
-  Claude AI, GitHub, Hermes Agent
+  Claude AI, GitHub, Hermes Agent,
+  Perplexity, DeepSeek Chat, AFFiNE, StackEdit, OpenCut,
+  Dify, Onyx, Khoj
 
 ## Formato
 
