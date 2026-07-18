@@ -1,6 +1,6 @@
 # Apps Pake — Situação
 
-Total: 22 apps no `config/apps.json`.
+Total: 24 apps no `config/apps.json`.
 
 ## ✅ Instalados (10)
 
@@ -17,9 +17,13 @@ Total: 22 apps no `config/apps.json`.
 | Google Sheets | 12/07/2026 |
 | Google Docs | 12/07/2026 |
 
-## 📦 MSI na área de trabalho — precisa instalar (11)
+> ⚠️ Apps com Google Sheets e Bear Notes apresentaram erro de login. **Causa:** user-agent hardcoded como Chrome 126, mas o WebView2 do sistema é Chrome 150. Google detectou o mismatch e bloqueou o login.
+>
+> **Fix aplicado:** user-agent removido (null) em todos os apps. Build em andamento no Actions.
 
-MSIs em `C:\Users\vinic\Desktop\PAKE_APPS\`, gerados em 17/07/2026.
+## 📦 MSI na área de trabalho — build anterior (user-agent Chrome 126)
+
+Os MSIs em `C:\Users\vinic\Desktop\PAKE_APPS\` são do build de 17/07/2026 e AINDA têm o user-agent antigo. **Não usar.** Aguardar o novo build.
 
 | App | MSI |
 |---|---|
@@ -34,16 +38,11 @@ MSIs em `C:\Users\vinic\Desktop\PAKE_APPS\`, gerados em 17/07/2026.
 | Dify | `Dify.msi` |
 | Onyx | `Onyx.msi` |
 | Khoj | `Khoj.msi` |
-
-## 📦 MSI na área de trabalho — Z.AI
-
-| App | MSI |
-|---|---|
 | Z.AI | `Z.AI.msi` |
 
-## 🔄 Aguardando build — novos apps
+## 🔄 Build em andamento — user-agent fix + apps novos
 
-| App | URL | Status |
-|---|---|---|
-| Z.AI OCR | https://ocr.z.ai | Build pendente |
-| Google Flow | https://labs.google/fx/pt/tools/flow | Build pendente |
+Workflow: [#29642887925](https://github.com/viniciusgomidesbento-sys/pake-apps/actions/runs/29642887925)
+
+Todos os 24 apps serão rebuildados com user-agent nativo do WebView2 (Chrome 150).
+Quando concluir, baixo e substituo os MSIs na área de trabalho.
