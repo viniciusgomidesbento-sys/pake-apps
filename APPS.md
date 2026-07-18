@@ -2,7 +2,7 @@
 
 Total: 24 apps no `config/apps.json`.
 
-## ✅ Instalados (10)
+## ✅ Instalados — versão antiga (user-agent Chrome 126)
 
 | App | Instalado em |
 |---|---|
@@ -17,32 +17,39 @@ Total: 24 apps no `config/apps.json`.
 | Google Sheets | 12/07/2026 |
 | Google Docs | 12/07/2026 |
 
-> ⚠️ Apps com Google Sheets e Bear Notes apresentaram erro de login. **Causa:** user-agent hardcoded como Chrome 126, mas o WebView2 do sistema é Chrome 150. Google detectou o mismatch e bloqueou o login.
+> ⚠️ Esses apps foram buildados com user-agent Chrome 126 hardcoded, mas o WebView2 do sistema é Chrome 150. Isso causou erro no Google/Bear Notes.
 >
-> **Fix aplicado:** user-agent removido (null) em todos os apps. Build em andamento no Actions.
+> **Solução:** reinstalar com os MSIs novos em `C:\Users\vinic\Desktop\PAKE_APPS\`
 
-## 📦 MSI na área de trabalho — build anterior (user-agent Chrome 126)
+## 📦 MSI novos na área de trabalho (user-agent nativo — Chrome 150)
 
-Os MSIs em `C:\Users\vinic\Desktop\PAKE_APPS\` são do build de 17/07/2026 e AINDA têm o user-agent antigo. **Não usar.** Aguardar o novo build.
+Build: [29630809708](https://github.com/viniciusgomidesbento-sys/pake-apps/actions/runs/29630809708) (18/07/2026)
 
-| App | MSI |
-|---|---|
-| Claude AI | `Claude AI.msi` |
-| GitHub | `GitHub.msi` |
-| Hermes Agent | `Hermes Agent.msi` |
-| Perplexity | `Perplexity.msi` |
-| DeepSeek Chat | `DeepSeek Chat.msi` |
-| AFFiNE | `AFFiNE.msi` |
-| StackEdit | `StackEdit.msi` |
-| OpenCut | `OpenCut.msi` |
-| Dify | `Dify.msi` |
-| Onyx | `Onyx.msi` |
-| Khoj | `Khoj.msi` |
-| Z.AI | `Z.AI.msi` |
+**24 MSIs** em `C:\Users\vinic\Desktop\PAKE_APPS\` — clicar pra instalar (substitui a versão antiga).
 
-## 🔄 Build em andamento — user-agent fix + apps novos
-
-Workflow: [#29642887925](https://github.com/viniciusgomidesbento-sys/pake-apps/actions/runs/29642887925)
-
-Todos os 24 apps serão rebuildados com user-agent nativo do WebView2 (Chrome 150).
-Quando concluir, baixo e substituo os MSIs na área de trabalho.
+| App | MSI | Instalação |
+|---|---|---|
+| NotebookLM | ✅ | **Reinstalar** (fix user-agent) |
+| ChatGPT | ✅ | **Reinstalar** (fix user-agent) |
+| n8n | ✅ | **Reinstalar** (fix user-agent) |
+| Bear Notes | ✅ | **Reinstalar** (fix user-agent) |
+| Tec Concursos | ✅ | **Reinstalar** (fix user-agent) |
+| Guruja | ✅ | **Reinstalar** (fix user-agent) |
+| Google Drive | ✅ | **Reinstalar** (fix user-agent) |
+| Google App Script | ✅ | **Reinstalar** (fix user-agent) |
+| Google Sheets | ✅ | **Reinstalar** (fix user-agent) |
+| Google Docs | ✅ | **Reinstalar** (fix user-agent) |
+| Claude AI | ✅ | Instalar (nova) |
+| GitHub | ✅ | Instalar (nova) |
+| Hermes Agent | ✅ | Instalar (nova) |
+| Perplexity | ✅ | Instalar (nova) |
+| DeepSeek Chat | ✅ | Instalar (nova) |
+| AFFiNE | ✅ | Instalar (nova) |
+| StackEdit | ✅ | Instalar (nova) |
+| OpenCut | ✅ | Instalar (nova) |
+| Dify | ✅ | Instalar (nova) |
+| Onyx | ✅ | Instalar (nova) |
+| Khoj | ✅ | Instalar (nova) |
+| Z.AI | ✅ | Instalar (nova) |
+| Z.AI OCR | ✅ | Instalar (nova) |
+| Google Flow | ✅ | Instalar (nova) |
