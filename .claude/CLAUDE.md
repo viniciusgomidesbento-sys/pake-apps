@@ -25,7 +25,7 @@ Build multi-plataforma (Windows/macOS/Linux) a partir de config centralizada.
 .\scripts\add-app.ps1
 
 # Build local Windows
-.\scripts\build-local.ps1 -Name "ChatGPT"
+.\scripts\build-local.ps1 -Name "NotebookLM"
 ```
 
 ## Links

@@ -1,55 +1,39 @@
 # Apps Pake — Situação
 
-Total: 24 apps no `config/apps.json`.
+Total: **14 apps** em [`config/apps.json`](config/apps.json) (fonte da verdade).
 
-## ✅ Instalados — versão antiga (user-agent Chrome 126)
+Recorte de 2026-10-11: 12 apps mantidos da lista anterior + 2 novos (Qwen AI, Xiaomi Console). Os demais foram removidos da matrix.
 
-| App | Instalado em |
+## Catálogo atual
+
+| App | URL |
 |---|---|
-| NotebookLM | 12/07/2026 |
-| ChatGPT | 12/07/2026 |
-| n8n | 12/07/2026 |
-| Bear Notes | 12/07/2026 |
-| Tec Concursos | 12/07/2026 |
-| Guruja | 12/07/2026 |
-| Google Drive | 12/07/2026 |
-| Google App Script | 12/07/2026 |
-| Google Sheets | 12/07/2026 |
-| Google Docs | 12/07/2026 |
+| NotebookLM | https://notebooklm.google |
+| n8n | VPS Hostinger (`n8n-tfxb.srv1724289.hstgr.cloud`) |
+| Tec Concursos | https://www.tecconcursos.com.br |
+| Guruja | https://portal.guruja.com.br |
+| Google App Script | https://script.google.com/home/ |
+| Perplexity | https://www.perplexity.ai |
+| DeepSeek Chat | https://chat.deepseek.com |
+| OpenCut | https://opencut.app |
+| Onyx | https://cloud.onyx.app |
+| Z.AI | https://chat.z.ai |
+| Z.AI OCR | https://ocr.z.ai |
+| Google Flow | https://labs.google/fx/pt/tools/flow |
+| Qwen AI | https://chat.qwen.ai |
+| Xiaomi Console | https://i.mi.com |
 
-> ⚠️ Esses apps foram buildados com user-agent Chrome 126 hardcoded, mas o WebView2 do sistema é Chrome 150. Isso causou erro no Google/Bear Notes.
->
-> **Solução:** reinstalar com os MSIs novos em `C:\Users\vinic\Desktop\PAKE_APPS\`
+## Instaladores
 
-## 📦 MSI novos na área de trabalho (user-agent nativo — Chrome 150)
+Não há MSIs/DMGs/DEBs versionados neste recorte. O último CI verde em `master` foi o run [34129357644](https://github.com/viniciusgomidesbento-sys/pake-apps/actions/runs/34129357644) (07/09/2026, lista antiga de 27 apps); os artefatos já expiraram (retenção 30 dias).
 
-Build: [29630809708](https://github.com/viniciusgomidesbento-sys/pake-apps/actions/runs/29630809708) (18/07/2026)
+Depois do merge, disparar **Actions → Build Pake Apps** para gerar instaladores dos 14 apps atuais. Qwen AI e Xiaomi Console ainda não têm build.
 
-**24 MSIs** em `C:\Users\vinic\Desktop\PAKE_APPS\` — clicar pra instalar (substitui a versão antiga).
+### Histórico (lista antiga — não usar)
 
-| App | MSI | Instalação |
-|---|---|---|
-| NotebookLM | ✅ | **Reinstalar** (fix user-agent) |
-| ChatGPT | ✅ | **Reinstalar** (fix user-agent) |
-| n8n | ✅ | **Reinstalar** (fix user-agent) |
-| Bear Notes | ✅ | **Reinstalar** (fix user-agent) |
-| Tec Concursos | ✅ | **Reinstalar** (fix user-agent) |
-| Guruja | ✅ | **Reinstalar** (fix user-agent) |
-| Google Drive | ✅ | **Reinstalar** (fix user-agent) |
-| Google App Script | ✅ | **Reinstalar** (fix user-agent) |
-| Google Sheets | ✅ | **Reinstalar** (fix user-agent) |
-| Google Docs | ✅ | **Reinstalar** (fix user-agent) |
-| Claude AI | ✅ | Instalar (nova) |
-| GitHub | ✅ | Instalar (nova) |
-| Hermes Agent | ✅ | Instalar (nova) |
-| Perplexity | ✅ | Instalar (nova) |
-| DeepSeek Chat | ✅ | Instalar (nova) |
-| AFFiNE | ✅ | Instalar (nova) |
-| StackEdit | ✅ | Instalar (nova) |
-| OpenCut | ✅ | Instalar (nova) |
-| Dify | ✅ | Instalar (nova) |
-| Onyx | ✅ | Instalar (nova) |
-| Khoj | ✅ | Instalar (nova) |
-| Z.AI | ✅ | Instalar (nova) |
-| Z.AI OCR | ✅ | Instalar (nova) |
-| Google Flow | ✅ | Instalar (nova) |
+- User-agent Chrome 126 vs WebView2 150: corrigido (`user-agent: null` em todos).
+- Builds de 18/07/2026 ([29630809708](https://github.com/viniciusgomidesbento-sys/pake-apps/actions/runs/29630809708)) e 07/09/2026 são da lista antiga (ChatGPT, Claude, Grok, etc.) e não cobrem este recorte.
+
+## Removidos neste recorte
+
+ChatGPT, Bear Notes, Google Drive, Google Sheets, Google Docs, Claude AI, GitHub, Hermes Agent, AFFiNE, StackEdit, Dify, Khoj, PaddleOCR, Kanban Local, Grok.

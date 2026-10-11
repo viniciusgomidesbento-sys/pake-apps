@@ -66,3 +66,19 @@ Claude AI, GitHub, Hermes Agent
 | Run | ID | Resultado |
 |-----|-----|-----------|
 | #8 | 29285042460 | ✅ Sucesso — 40/40 jobs |
+
+# Sessão 2026-10-11 — Recorte da lista (14 apps)
+
+## O que foi feito
+1. **Manter 12 apps** existentes (objetos JSON intactos): NotebookLM, n8n, Tec Concursos, Guruja, Google App Script, Perplexity, DeepSeek Chat, OpenCut, Onyx, Z.AI, Z.AI OCR, Google Flow.
+2. **Remover 15 apps:** ChatGPT, Bear Notes, Google Drive, Google Sheets, Google Docs, Claude AI, GitHub, Hermes Agent, AFFiNE, StackEdit, Dify, Khoj, PaddleOCR, Kanban Local, Grok.
+3. **Adicionar 2 apps** no mesmo schema (dark-mode, tray, pt-BR, `user-agent`/`icon` null):
+   - **Qwen AI** — `https://chat.qwen.ai` (chat oficial; HTTP 200, sem redirect).
+   - **Xiaomi Console** — `https://i.mi.com` (Xiaomi Cloud: app web autenticado; suporte Xiaomi: único site oficial da Mi Cloud). Alternativa considerada: `https://dev.mi.com/platform/console` (管理中心 / console de desenvolvedor, UI em chinês).
+4. Docs alinhadas: `APPS.md`, este log, `README.md`, `config/icons/README.md`. Sem pin de `pake-cli` e sem mudança no cache Rust.
+
+## Catálogo atual (14)
+NotebookLM, n8n, Tec Concursos, Guruja, Google App Script, Perplexity, DeepSeek Chat, OpenCut, Onyx, Z.AI, Z.AI OCR, Google Flow, Qwen AI, Xiaomi Console.
+
+## Builds
+Nenhum workflow disparado nesta sessão. Instaladores do recorte ainda não existem; o último CI verde em `master` continua o run 34129357644 (07/09/2026, lista de 27 apps, artefatos expirados).
