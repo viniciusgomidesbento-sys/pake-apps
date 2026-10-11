@@ -9,7 +9,7 @@ Empacotamento de sites como **aplicativos desktop nativos** usando [Pake](https:
 3. **Build** em 3 SOs simultâneos (Windows, macOS, Linux)
 4. **Download** dos instaladores em **Actions → Artifacts**
 
-Lista atual (14 apps): ver [`APPS.md`](APPS.md) e [`config/apps.json`](config/apps.json).
+Lista atual (16 apps): ver [`APPS.md`](APPS.md) e [`config/apps.json`](config/apps.json).
 
 ## Pré-requisitos
 
