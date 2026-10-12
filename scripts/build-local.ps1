@@ -6,7 +6,7 @@
 #   .\scripts\build-local.ps1 -Name "NotebookLM"
 #
 # Lê os parâmetros do config/apps.json e executa o pake localmente.
-# Requer: pake-cli instalado (npm install -g pake-cli)
+# Requer: pake-cli@3.17.3 instalado (npm install -g pake-cli@3.17.3)
 # =============================================================================
 
 param(

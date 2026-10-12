@@ -9,8 +9,10 @@
 #   - Push na main com mudanças em config/apps.json ou no próprio workflow
 #
 # Cache:
-#   - Rust (~/.cargo, ~/.rustup) — persiste entre builds, acelera ~10min → ~5min
-#   - npm global — pacotes do Pake CLI
+#   - Rust, chaves só por SO (runner.os). Sem restore-keys sem OS (isso misturou
+#     cache macOS no Linux). Linux usa ~/.cargo-fresh + ~/.rustup-fresh; macOS e
+#     Windows usam ~/.cargo + ~/.rustup. Sem hash de Cargo.lock (este repo não tem).
+#   - npm global — pake-cli pinado (PAKE_CLI_VERSION)
 #
 # Saída:
 #   - Windows: .msi .exe
@@ -47,7 +49,8 @@ on:
       - '.github/workflows/build-apps.yml'
 
 env:
-  PAKE_CACHE_KEY: pake-v1
+  PAKE_CACHE_KEY: pake-v2
+  PAKE_CLI_VERSION: 3.17.3
   CARGO_TERM_COLOR: always
 
 # ── Jobs ────────────────────────────────────────────────────────────────────
@@ -104,17 +107,26 @@ jobs:
           node-version: '22'
 
       # ── Cache ─────────────────────────────────────────────────────────────
-      - name: Cache Rust toolchain
-        if: ${{ !inputs.skip-cache }}
+      # Linux instala rustup em ~/.cargo-fresh e ~/.rustup-fresh (CARGO_HOME /
+      # RUSTUP_HOME). Cachear ~/.cargo aqui era inútil e, com restore-keys sem
+      # OS, o Linux já restaurou artefato de macOS (SESSION_LOG runs #3–#4).
+      - name: Cache Rust toolchain (Linux)
+        if: ${{ !inputs.skip-cache && runner.os == 'Linux' }}
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo-fresh
+            ~/.rustup-fresh
+          key: ${{ env.PAKE_CACHE_KEY }}-rust-${{ runner.os }}
+
+      - name: Cache Rust toolchain (macOS/Windows)
+        if: ${{ !inputs.skip-cache && runner.os != 'Linux' }}
         uses: actions/cache@v4
         with:
           path: |
             ~/.cargo
             ~/.rustup
-          key: ${{ env.PAKE_CACHE_KEY }}-rust-${{ matrix.os }}-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            ${{ env.PAKE_CACHE_KEY }}-rust-${{ matrix.os }}-
-            ${{ env.PAKE_CACHE_KEY }}-rust-
+          key: ${{ env.PAKE_CACHE_KEY }}-rust-${{ runner.os }}
 
       - name: Cache pake-cli global
         if: ${{ !inputs.skip-cache }}
@@ -123,15 +135,15 @@ jobs:
           path: |
             ~/.npm-global
             /usr/local/lib/node_modules
-          key: ${{ env.PAKE_CACHE_KEY }}-npm-${{ matrix.os }}
+          key: ${{ env.PAKE_CACHE_KEY }}-npm-${{ runner.os }}-${{ env.PAKE_CLI_VERSION }}
 
       # ── Instalação ────────────────────────────────────────────────────────
       - name: Install Rust toolchain (Linux)
         if: runner.os == 'Linux'
         run: |
           # Pake requires Rust >= 1.85.0 (edition2024). apt provides 1.75 - too old.
-          # Use rustup but set CARGO_HOME to a fresh temp dir to avoid stale
-          # cross-platform cache conflict from macOS runners.
+          # Keep CARGO_HOME/RUSTUP_HOME off ~/.cargo so a leftover macOS cache
+          # cannot clobber the Linux toolchain. These dirs are cached above.
           export CARGO_HOME="$HOME/.cargo-fresh"
           export RUSTUP_HOME="$HOME/.rustup-fresh"
           mkdir -p "$CARGO_HOME/bin"
@@ -176,7 +188,7 @@ jobs:
         shell: bash
 
       - name: Install pake-cli
-        run: npm install -g pake-cli
+        run: npm install -g pake-cli@${{ env.PAKE_CLI_VERSION }}
 
       - name: Verify pake + Rust
         run: |
