@@ -107,3 +107,17 @@ NotebookLM, n8n, Tec Concursos, Guruja, Google App Script, Perplexity, DeepSeek 
 
 ## Catálogo
 Inalterado: 16 apps no master.
+
+# Sessão 2026-10-12 — Recorte para 3 apps
+
+## O que foi feito
+1. **PR #2 mergeado** (squash `e026a52`): pin `pake-cli@3.17.3` + cache Rust no master. CI 50/50 verde.
+2. **Recorte da lista:** manter só 3 objetos JSON já existentes (URLs intactas):
+   - **Qwen AI** — `https://chat.qwen.ai`
+   - **Kimi** — `https://www.kimi.com`
+   - **Xiaomi Console** — `https://i.mi.com`
+3. **Removidos (13):** NotebookLM, n8n, Tec Concursos, Guruja, Google App Script, Perplexity, DeepSeek Chat, OpenCut, Onyx, Z.AI, Z.AI OCR, Google Flow, Z.AI Console.
+4. Docs: `APPS.md`, este log, `README.md`, `config/icons/README.md`. Sem apps novos.
+
+## Catálogo atual (3)
+Qwen AI, Kimi, Xiaomi Console.
