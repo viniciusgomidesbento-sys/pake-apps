@@ -93,3 +93,17 @@ Nenhum workflow disparado nesta sessão. Instaladores do recorte ainda não exis
 
 ## Catálogo atual (16)
 NotebookLM, n8n, Tec Concursos, Guruja, Google App Script, Perplexity, DeepSeek Chat, OpenCut, Onyx, Z.AI, Z.AI OCR, Google Flow, Qwen AI, Xiaomi Console, Z.AI Console, Kimi.
+
+# Sessão 2026-10-12 — Pin pake-cli@3.17.3 + cache Rust
+
+## O que foi feito
+1. **Pin `pake-cli@3.17.3`** (npm latest na data; docs ainda falavam 3.14.0). `PAKE_CLI_VERSION` no workflow; `npm install -g pake-cli@${{ env.PAKE_CLI_VERSION }}`. README, `build-local.ps1`, handoff e referência alinhados. Sem recorte de apps.
+2. **Cache Rust:**
+   - Prefixo `pake-v1` → `pake-v2` (invalida caches antigos).
+   - Chave exata: `pake-v2-rust-${{ runner.os }}` (Linux / macOS / Windows). Sem `restore-keys` — o prefixo `pake-v1-rust-` sem OS restaurou artefato macOS no Linux (runs #3–#4).
+   - Linux passa a cachear `~/.cargo-fresh` + `~/.rustup-fresh` (onde o job instala). Antes gravava `~/.cargo` / `~/.rustup`, inúteis no Linux.
+   - Removido `hashFiles('**/Cargo.lock')` — este repo não tem Cargo.lock (hash vazio).
+   - Cache npm: `pake-v2-npm-${{ runner.os }}-3.17.3`.
+
+## Catálogo
+Inalterado: 16 apps no master.

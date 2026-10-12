@@ -17,7 +17,7 @@ Lista atual (16 apps): ver [`APPS.md`](APPS.md) e [`config/apps.json`](config/ap
 |---------|----------|
 | [Fork do Pake](https://github.com/viniciusgomidesbento-sys/Pake) | Workflows GitHub Actions |
 | Node.js ≥ 22 | Build local (Windows) |
-| pake-cli (`npm install -g pake-cli`) | Build local |
+| pake-cli (`npm install -g pake-cli@3.17.3`) | Build local |
 
 ## Estrutura do Projeto
 
@@ -103,7 +103,7 @@ O workflow [`build-apps.yml`](.github/workflows/build-apps.yml) faz:
 .\scripts\build-local.ps1 -Name "NotebookLM"
 ```
 
-Requer `pake-cli` instalado globalmente.
+Requer `pake-cli@3.17.3` instalado globalmente (`npm install -g pake-cli@3.17.3`).
 
 ## Injeção de CSS/JS
 

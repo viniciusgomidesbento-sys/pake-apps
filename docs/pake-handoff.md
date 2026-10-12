@@ -19,7 +19,7 @@ A documentação completa que produzimos está em:
 
 ## Status Atual
 
-- **Pake CLI 3.14.0** instalado e funcional no ambiente Windows
+- **Pake CLI 3.17.3** pinado neste repositório (`npm install -g pake-cli@3.17.3`)
 - Ambiente: Windows 11 Home, Node.js, Rust (via pake)
 - Referência completa salva em `19_hermes_adm/docs/pake-cli-reference.md`
 
@@ -90,6 +90,6 @@ pake <URL> --name "AppName" <flags>
 
 Quando este handoff for lido no novo projeto:
 1. A referência completa está em `docs/pake-cli-reference.md` no projeto anterior
-2. Pake CLI 3.14.0 já está instalado
+2. Instalar com `npm install -g pake-cli@3.17.3` (versão pinada neste repo)
 3. Verificar com `pake --version`
 4. Se for build macOS/Linux, preparar GitHub Actions workflow

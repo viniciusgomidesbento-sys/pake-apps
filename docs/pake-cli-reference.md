@@ -94,15 +94,17 @@ sudo apt install libdbus-1-dev \
 
 ## Instalação
 
-```powershell
-# Recomendado (pnpm)
-pnpm install -g pake-cli
+Neste repositório o CI e o build local pinam **pake-cli@3.17.3**.
 
-# Alternativa (npm)
-npm install -g pake-cli
+```powershell
+# Recomendado neste repo (versão pinada)
+npm install -g pake-cli@3.17.3
+
+# Alternativa (pnpm)
+pnpm install -g pake-cli@3.17.3
 
 # Sem instalação global
-npx pake-cli [url] [options]
+npx pake-cli@3.17.3 [url] [options]
 ```
 
 **Problemas de permissão no Linux/macOS:**
@@ -756,16 +758,16 @@ pake https://example.com --icon ./icon.icns
 
 ```bash
 # Opção 1: npx (sem instalação)
-npx pake-cli https://example.com
+npx pake-cli@3.17.3 https://example.com
 
 # Opção 2: corrigir permissões npm
 npm config set prefix ~/.npm-global
 echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
 source ~/.bashrc
-npm install -g pake-cli
+npm install -g pake-cli@3.17.3
 
 # Opção 3: pnpm (recomendado)
-pnpm install -g pake-cli
+pnpm install -g pake-cli@3.17.3
 ```
 
 ### Getting Help
