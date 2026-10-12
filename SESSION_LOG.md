@@ -66,3 +66,30 @@ Claude AI, GitHub, Hermes Agent
 | Run | ID | Resultado |
 |-----|-----|-----------|
 | #8 | 29285042460 | ✅ Sucesso — 40/40 jobs |
+
+# Sessão 2026-10-11 — Recorte da lista (14 apps)
+
+## O que foi feito
+1. **Manter 12 apps** existentes (objetos JSON intactos): NotebookLM, n8n, Tec Concursos, Guruja, Google App Script, Perplexity, DeepSeek Chat, OpenCut, Onyx, Z.AI, Z.AI OCR, Google Flow.
+2. **Remover 15 apps:** ChatGPT, Bear Notes, Google Drive, Google Sheets, Google Docs, Claude AI, GitHub, Hermes Agent, AFFiNE, StackEdit, Dify, Khoj, PaddleOCR, Kanban Local, Grok.
+3. **Adicionar 2 apps** no mesmo schema (dark-mode, tray, pt-BR, `user-agent`/`icon` null):
+   - **Qwen AI** — `https://chat.qwen.ai` (chat oficial; HTTP 200, sem redirect).
+   - **Xiaomi Console** — `https://i.mi.com` (Xiaomi Cloud: app web autenticado; suporte Xiaomi: único site oficial da Mi Cloud). Alternativa considerada: `https://dev.mi.com/platform/console` (管理中心 / console de desenvolvedor, UI em chinês).
+4. Docs alinhadas: `APPS.md`, este log, `README.md`, `config/icons/README.md`. Sem pin de `pake-cli` e sem mudança no cache Rust.
+
+## Catálogo (após este recorte inicial): 14
+NotebookLM, n8n, Tec Concursos, Guruja, Google App Script, Perplexity, DeepSeek Chat, OpenCut, Onyx, Z.AI, Z.AI OCR, Google Flow, Qwen AI, Xiaomi Console.
+
+## Builds
+Nenhum workflow disparado nesta sessão. Instaladores do recorte ainda não existem; o último CI verde em `master` continua o run 34129357644 (07/09/2026, lista de 27 apps, artefatos expirados).
+
+# Sessão 2026-10-11 — +Z.AI Console e Kimi (16 apps)
+
+## O que foi feito
+1. **Qwen AI** já estava no JSON — não duplicar.
+2. **Z.AI Console** — `https://z.ai/manage-apikey/apikey-list` (plataforma API internacional: chaves; billing em `/manage-apikey/billing`). Distinto de `chat.z.ai` (app Z.AI) e `ocr.z.ai`. `https://z.ai` redireciona para o chat. `https://z.ai/dashboard` = 404. Alternativa China: `https://open.bigmodel.cn/console` (BigModel, login por telefone).
+3. **Kimi** — `https://www.kimi.com` (canônico: `kimi.moonshot.cn` e `kimi.com` redirecionam para cá).
+4. Docs: catálogo em 16.
+
+## Catálogo atual (16)
+NotebookLM, n8n, Tec Concursos, Guruja, Google App Script, Perplexity, DeepSeek Chat, OpenCut, Onyx, Z.AI, Z.AI OCR, Google Flow, Qwen AI, Xiaomi Console, Z.AI Console, Kimi.

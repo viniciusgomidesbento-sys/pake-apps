@@ -3,7 +3,7 @@
 # build-local.ps1 — Build local de um app no Windows
 # =============================================================================
 # Uso:
-#   .\scripts\build-local.ps1 -Name "ChatGPT"
+#   .\scripts\build-local.ps1 -Name "NotebookLM"
 #
 # Lê os parâmetros do config/apps.json e executa o pake localmente.
 # Requer: pake-cli instalado (npm install -g pake-cli)

@@ -30,10 +30,10 @@ $configPath = Join-Path $PSScriptRoot ".." "config" "apps.json"
 $configPath = Resolve-Path $configPath -ErrorAction Stop
 
 if (-not $Url) {
-  $Url = Read-Host "URL do app (ex: https://chatgpt.com)"
+  $Url = Read-Host "URL do app (ex: https://notebooklm.google)"
 }
 if (-not $Name) {
-  $Name = Read-Host "Nome do app (ex: ChatGPT)"
+  $Name = Read-Host "Nome do app (ex: NotebookLM)"
 }
 if (-not $Url -or -not $Name) {
   Write-Error "URL e Name são obrigatórios"

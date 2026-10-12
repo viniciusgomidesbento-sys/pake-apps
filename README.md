@@ -9,6 +9,8 @@ Empacotamento de sites como **aplicativos desktop nativos** usando [Pake](https:
 3. **Build** em 3 SOs simultâneos (Windows, macOS, Linux)
 4. **Download** dos instaladores em **Actions → Artifacts**
 
+Lista atual (16 apps): ver [`APPS.md`](APPS.md) e [`config/apps.json`](config/apps.json).
+
 ## Pré-requisitos
 
 | Recurso | Para quê |
@@ -70,7 +72,7 @@ Edite [`config/apps.json`](config/apps.json) e adicione um novo bloco:
 ### Opção 3: Script direto
 
 ```powershell
-.\scripts\add-app.ps1 -Url "https://chatgpt.com" -Name "ChatGPT" -DarkMode -SystemTray
+.\scripts\add-app.ps1 -Url "https://notebooklm.google" -Name "NotebookLM" -DarkMode -SystemTray
 ```
 
 ## Workflow GitHub Actions
@@ -98,7 +100,7 @@ O workflow [`build-apps.yml`](.github/workflows/build-apps.yml) faz:
 ## Build Local (Windows)
 
 ```powershell
-.\scripts\build-local.ps1 -Name "ChatGPT"
+.\scripts\build-local.ps1 -Name "NotebookLM"
 ```
 
 Requer `pake-cli` instalado globalmente.
