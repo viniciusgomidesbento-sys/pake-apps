@@ -9,7 +9,7 @@ Empacotamento de sites como **aplicativos desktop nativos** usando [Pake](https:
 3. **Build** em 3 SOs simultâneos (Windows, macOS, Linux)
 4. **Download** dos instaladores em **Actions → Artifacts**
 
-Lista atual (16 apps): ver [`APPS.md`](APPS.md) e [`config/apps.json`](config/apps.json).
+Lista atual (3 apps — Qwen AI, Kimi, Xiaomi Console): ver [`APPS.md`](APPS.md) e [`config/apps.json`](config/apps.json).
 
 ## Pré-requisitos
 
@@ -100,7 +100,7 @@ O workflow [`build-apps.yml`](.github/workflows/build-apps.yml) faz:
 ## Build Local (Windows)
 
 ```powershell
-.\scripts\build-local.ps1 -Name "NotebookLM"
+.\scripts\build-local.ps1 -Name "Qwen AI"
 ```
 
 Requer `pake-cli@3.17.3` instalado globalmente (`npm install -g pake-cli@3.17.3`).

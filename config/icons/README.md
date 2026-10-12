@@ -13,11 +13,9 @@ Coloque aqui os ícones dos apps no formato correto por plataforma:
 1. Coloque o ícone com o **mesmo nome do app** na pasta (ex: `notebooklm.ico`, `n8n.png`, `qwen-ai.icns`)
 2. O workflow injeta automaticamente via `--icon`
 
-## Apps disponíveis (16)
+## Apps disponíveis (3)
 
-- NotebookLM, n8n, Tec Concursos, Guruja, Google App Script,
-  Perplexity, DeepSeek Chat, OpenCut, Onyx, Z.AI, Z.AI OCR,
-  Google Flow, Qwen AI, Xiaomi Console, Z.AI Console, Kimi
+- Qwen AI, Kimi, Xiaomi Console
 
 ## Formato
 
